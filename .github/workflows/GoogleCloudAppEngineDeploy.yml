@@ -1,50 +1,33 @@
-name: App Engine Deployer
-run-name: Deploy to App Engine
+name: 🚀  Deploy Backend and dispatch.yaml to Google App Engine
 
 on:
-  push:
-    tags: [ 'v*.*.*' ]
-    
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  release:
+    types: [created]
 
 jobs:
-  TestAndDeploy:
-    name: Test And Deploy
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checking out repository
-        uses: actions/checkout@v3
+      - name: ⬇️  Checkout code
+        uses: actions/checkout@v2
 
-      - name: Setting up Node.js 
-        uses: actions/setup-node@v3
+
+
+      - name: 🔐 Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
         with:
-          node-version: 20.x
-          cache: 'npm'
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      - name: Installing NPM Packages
-        run: npm ci
-
-      - name: Building Frontend Files
-        run: npm run build
-
-      - name: Runing Tests
-        run: npm test
-
-      - name: Deploying to App Engine
-        id: deploy
-        uses: google-github-actions/deploy-appengine@v0.2.0
+      - name: 🛠️ Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
         with:
-          deliverables: app.yaml
-          version: v1
-          project_id: ${{ secrets.GCP_PROJECT }}
-          credentials: ${{ secrets.GCP_CREDENTIALS }}  
-          
-      - name: Testing Deployment Job
-        run: curl "${{ steps.deploy.outputs.url }}"
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Send Push Notification
-        uses: techulus/push-github-action@1.0.0
-        env:
-          API_KEY: ${{ secrets.PUSH_NOTIFICATION_KEY }}
-          MESSAGE: "Deployment of version ${{ steps.deploy.outputs.version }} is successful"
+      - name: 🚀  Deploy backend service
+        run: |
+          gcloud app deploy --project ${{ secrets.GCP_PROJECT_ID }} --quiet
+
+      - name: 🚀  Deploy dispatch.yaml
+        run: |
+          gcloud app deploy dispatch.yaml --project ${{ secrets.GCP_PROJECT_ID }} --quiet
