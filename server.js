@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:5001', 'http://localhost:8080', 'https://summy.dev', 'https://www.summy.dev', 'https://summydev.github.io', 'https://summydev.github.io/summy.dev/'],
+  origin: ['http://localhost:5001', 'http://localhost:8080', 'https://summy.dev', 'https://www.summy.dev', 'https://summydev.github.io', 'https://summydev.github.io/summy.dev/', 'https://frontend-dot-summy-dev.uc.r.appspot.com/'],
   optionsSuccessStatus: 200,
 };
 
