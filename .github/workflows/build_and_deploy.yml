@@ -1,0 +1,38 @@
+name: 🚀  Build and Deploy to AWS Elastic Beanstalk
+
+on:
+  push:
+    branches:
+      - master
+  release:
+    types: [created]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️  Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+        
+      - name: ⬇️ Install dependencies
+        run: npm install
+
+      - name: 🚀 Build Deployment Package
+        run: zip -r deployment-package.zip .
+
+      - name: 🚀 Deploy to AWS Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: 'ap-south-1'
+          application_name: 'summy.dev-backend'
+          environment_name: 'Summydev-backend-env'
+          version_label: ${{ github.sha }}
+          deployment_package: 'deployment-package.zip'
