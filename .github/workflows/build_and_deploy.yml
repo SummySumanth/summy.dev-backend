@@ -32,7 +32,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ vars.AWS_REGION }}
         run: |
-          eb init ${{ vars.EB_APP_NAME }} --platform node.js --region ${{ var.AWS_REGION }}
+          eb init ${{ vars.EB_APP_NAME }} --platform node.js --region ${{ vars.AWS_REGION }}
           eb deploy ${{ vars.EB_ENV_NAME }}
 
       - name: Invalidate CloudFront (Optional)
