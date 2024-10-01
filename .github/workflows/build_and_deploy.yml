@@ -36,5 +36,5 @@ jobs:
           region: 'ap-south-1'
           application_name: 'summy.dev-backend'
           environment_name: 'Summydev-backend-env'
-          VersionLabel: ${{ github.sha }}
+          version_label: ${{ github.sha }}
           deployment_package: 'deployment-package.zip'
