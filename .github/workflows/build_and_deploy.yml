@@ -25,6 +25,8 @@ jobs:
 
       - name: 🚀 Build Deployment Package
         run: zip -r deployment-package.zip .
+      - name: debug variables
+        run: echo ${{github.sha}}
 
       - name: 🚀 Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
