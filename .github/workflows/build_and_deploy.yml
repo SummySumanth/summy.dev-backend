@@ -29,7 +29,7 @@ jobs:
         run: echo ${{github.sha}}
 
       - name: 🚀 Deploy to AWS Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v20
+        uses: einaregilsson/beanstalk-deploy@v19
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -37,4 +37,5 @@ jobs:
           application_name: 'summy.dev-backend'
           environment_name: 'Summydev-backend-env'
           version_label: ${{ github.sha }}
+          version_description: 'Deploying from GitHub Actions'
           deployment_package: 'deployment-package.zip'
