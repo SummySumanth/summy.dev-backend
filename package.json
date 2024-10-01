@@ -1,6 +1,6 @@
 {
   "name": "summy.dev-backend",
-  "version": "1.0.0",
+  "version": "0.0.13",
   "description": "serves for summy.dev",
   "main": "server.js",
   "scripts": {
