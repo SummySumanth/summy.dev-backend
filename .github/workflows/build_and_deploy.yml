@@ -29,12 +29,13 @@ jobs:
         run: echo ${{github.sha}}
 
       - name: 🚀 Deploy to AWS Elastic Beanstalk
-        uses: addnab/aws-elastic-beanstalk-deploy@v2
+        uses: einaregilsson/beanstalk-deploy@v10
         with:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          REGION: 'ap-south-1'
-          APPLICATION_NAME: 'summy.dev-backend'
-          ENVIRONMENT_NAME: 'Summydev-backend-env'
-          VERSION_LABEL: ${{ github.sha }}
-          ZIP_FILE: 'deployment-package.zip'
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: 'ap-south-1'
+          application_name: 'summy.dev-backend'
+          environment_name: 'Summydev-backend-env'
+          version_label: ${{ github.sha }}
+          version_description: 'Deploying from GitHub Actions'
+          deployment_package: 'deployment-package.zip'
