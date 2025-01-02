@@ -36,16 +36,16 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './dist', 'index.html'));
 });
 
-// app.listen(process.env.PORT || PORT, () => {
-//   if (global.applicationSecrets.NODE_ENV === 'development') {
-//     console.clear();
-//   }
-//   console.log(`🚀 Server is now running at port ${PORT} on localhost successfully - Current Environment Mode: ${global.applicationSecrets.NODE_ENV}`);
+app.listen(process.env.PORT || PORT, () => {
+  if (global.applicationSecrets.NODE_ENV === 'development') {
+    console.clear();
+  }
+  console.log(`🚀 Server is now running at port ${PORT} on localhost successfully - Current Environment Mode: ${global.applicationSecrets.NODE_ENV}`);
 
-//   console.table({
-//     PORT,
-//     'Environment Type': global.applicationSecrets.NODE_ENV,
-//   });
-// });
+  console.table({
+    PORT,
+    'Environment Type': global.applicationSecrets.NODE_ENV,
+  });
+});
 
 module.exports = app;
