@@ -9,25 +9,23 @@
 //   return version.payload.data.toString('utf8');
 // }
 
-function Environment(NODE_ENV) {
-  if (process.env.NODE_ENV === 'production') {
-    const mediumToken = accessSecret('medium-api-token');
-    const hashnodeToken = accessSecret('hashnode-access-token');
-    const mediumToken = accessSecret('');
-    const hashnodeToken = accessSecret('');
-    this.keysAndValues = {
-      mediumToken,
-      hashnodeToken,
-    };
-  } else {
-    const mediumToken = process.env.MEDIUM_API_KEY;
-    const hashnodeToken = process.env.HASNHNODE_API_KEY;
-    this.keysAndValues = {
-      mediumToken,
-      hashnodeToken,
-    };
-  }
-  this.NODE_ENV = NODE_ENV || 'development';
-}
+// function Environment(NODE_ENV) {
+//   if (process.env.NODE_ENV === 'production') {
+//     const mediumToken = accessSecret('medium-api-token');
+//     const hashnodeToken = accessSecret('hashnode-access-token');
+//     this.keysAndValues = {
+//       mediumToken,
+//       hashnodeToken,
+//     };
+//   } else {
+//     const mediumToken = process.env.MEDIUM_API_KEY;
+//     const hashnodeToken = process.env.HASNHNODE_API_KEY;
+//     this.keysAndValues = {
+//       mediumToken,
+//       hashnodeToken,
+//     };
+//   }
+//   this.NODE_ENV = NODE_ENV || 'development';
+// }
 
-module.exports = new Environment(process.env.NODE_ENV);
+// module.exports = new Environment(process.env.NODE_ENV);
