@@ -47,3 +47,5 @@ app.listen(process.env.PORT || PORT, () => {
     'Environment Type': global.applicationSecrets.NODE_ENV,
   });
 });
+
+module.exports = app;
