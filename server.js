@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:5001', 'http://localhost:8080', 'https://summy.dev',],
+  origin: ['http://localhost:5001', 'http://localhost:8080', 'https://summy.dev', 'https://api.summy.dev',],
   optionsSuccessStatus: 200,
 };
 
