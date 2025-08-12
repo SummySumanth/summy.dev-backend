@@ -8,13 +8,13 @@ const downloader = (req, res) => {
       src = fs.createReadStream(
         path.join(
           __dirname,
-          "../../storage/pdf/Sumanth-Frontend-React-Developer-8_Years_Exp_v5.pdf"
+          "../../storage/pdf/Sumanth-Frontend-React-Developer-8_Years_Exp_v6.pdf"
         )
       );
       res.writeHead(200, {
         "Content-Type": "application/pdf",
         "Content-Disposition":
-          "attachment; filename=sumanth-react-dev-resume.pdf",
+          "attachment; filename=Sumanth-Frontend-React-Developer-8_Years_Exp.pdf",
         "Content-Transfer-Encoding": "Binary",
       });
 
