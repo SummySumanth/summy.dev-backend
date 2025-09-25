@@ -1,10 +1,23 @@
 const fs = require("fs");
 const path = require("path");
+const axios = require("axios");
 
 const downloader = (req, res) => {
   let src;
   switch (req.params.filename) {
     case "resume":
+      axios
+        .post(
+          "https://n8n_home.summy.dev/webhook-test/58abc73d-b9ca-44a4-9318-e193b2790260",
+          {
+            message: "RESUME DOWNLOADED",
+            rawHeaders: req.rawHeaders,
+            location: req.location,
+          }
+        )
+        .catch((err) => {
+          console.log("Failed to hit webhook", err.message);
+        });
       src = fs.createReadStream(
         path.join(
           __dirname,

@@ -1,47 +1,58 @@
-const express = require('express');
-const path = require('path');
-const dotenv = require('dotenv');
-const cors = require('cors');
+const express = require("express");
+const path = require("path");
+const dotenv = require("dotenv");
+const cors = require("cors");
 
-global.applicationSecrets = require('./src/utils/secrets');
+const geoMiddleware = require("./src/middlewares/geoMiddleware");
+
+global.applicationSecrets = require("./src/utils/secrets");
 
 dotenv.config();
 const app = express();
 
+app.use(geoMiddleware);
+
 const corsOptions = {
-  origin: ['http://localhost:5001', 'http://localhost:8080', 'https://summy.dev', 'https://api.summy.dev',],
+  origin: [
+    "http://localhost:5001",
+    "http://localhost:8080",
+    "https://summy.dev",
+    "https://api.summy.dev",
+  ],
   optionsSuccessStatus: 200,
 };
 
-const apiRoutes = require('./src/routes');
+const apiRoutes = require("./src/routes");
 
 const PORT = 8080;
 
 // To allow cross-origin requests and safely handle CORS - Cross-Origin Resource Sharing
 app.use(cors(corsOptions));
 
-app.get('/health', (req, res) => {
-  res.send('Server is healthy');
+app.get("/health", (req, res) => {
+  res.send("Server is healthy");
 });
 
 // API routes
-app.use('/api', apiRoutes);
+app.use("/api", apiRoutes);
 
 // Middleware to serve 'index.html' for all other routes
-app.get('*', (req, res) => {
-  console.log('reaching WILDCARD route', req);
-  res.sendFile(path.join(__dirname, './dist', 'index.html'));
+app.get("*", (req, res) => {
+  console.log("reaching WILDCARD route", req);
+  res.sendFile(path.join(__dirname, "./dist", "index.html"));
 });
 
 app.listen(process.env.PORT || PORT, () => {
-  if (global.applicationSecrets.NODE_ENV === 'development') {
+  if (global.applicationSecrets.NODE_ENV === "development") {
     console.clear();
   }
-  console.log(`🚀 Server is now running at port ${PORT} on localhost successfully - Current Environment Mode: ${global.applicationSecrets.NODE_ENV}`);
+  console.log(
+    `🚀 Server is now running at port ${PORT} on localhost successfully - Current Environment Mode: ${global.applicationSecrets.NODE_ENV}`
+  );
 
   console.table({
     PORT,
-    'Environment Type': global.applicationSecrets.NODE_ENV,
+    "Environment Type": global.applicationSecrets.NODE_ENV,
   });
 });
 
