@@ -26,7 +26,7 @@ const apiRoutes = require("./src/routes");
 
 const PORT = 8080;
 
-// To allow cross-origin requests and safely handle CORS - Cross-Origin Resource Sharing
+// To allow cross-origin requests and safely handle CORS - Cross-Origin Resource Sharing testing out how the automation pipeline is working
 app.use(cors(corsOptions));
 
 app.get("/health", (req, res) => {
