@@ -9,7 +9,7 @@ const downloader = (req, res) => {
       console.log("Resume is being downloaded");
       axios
         .post(
-          "https://n8n.summy.dev/webhook-test/58abc73d-b9ca-44a4-9318-e193b2790260",
+          "https://n8n.summy.dev/webhook/58abc73d-b9ca-44a4-9318-e193b2790260",
           {
             message: "RESUME DOWNLOADED",
             rawHeaders: req.rawHeaders,
